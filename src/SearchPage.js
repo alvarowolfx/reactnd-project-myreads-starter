@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import * as BooksAPI from './BooksAPI';
 
 import { Debounce } from 'react-throttle';
@@ -94,3 +95,12 @@ export default class SearchPage extends React.Component {
         )
     }
 }
+
+SearchPage.propTypes = {
+    booksOnShelf: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        shelf: PropTypes.string.isRequired,
+    })).isRequired,
+    onAddBookOnShelf: BooksGrid.propTypes.onUpdateBookShelf,
+    onBackClick: PropTypes.func.isRequired
+};

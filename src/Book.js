@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const Book = ({ book, onUpdateBookShelf }) => {
     const onBookShelfChange = (evt) => {
@@ -37,10 +38,23 @@ const Book = ({ book, onUpdateBookShelf }) => {
                 {book.title}
             </div>
             <div className="book-authors">
-                {book.author}
+                {book.authors}
             </div>
         </div>
     )
 }
+
+Book.propTypes = {
+    book: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        authors: PropTypes.arrayOf(PropTypes.string),
+        imageLinks: PropTypes.shape({
+            thumbnail: PropTypes.string.isRequired
+        }),
+        shelf: PropTypes.string.isRequired,
+    }).isRequired,
+    onUpdateBookShelf: PropTypes.func.isRequired
+};
 
 export default Book;

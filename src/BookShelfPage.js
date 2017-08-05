@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import BookShelf from './BookShelf';
 
@@ -46,3 +47,9 @@ export default class BookShelfPage extends React.Component {
         )
     }
 }
+
+BookShelfPage.propTypes = {
+    booksOnShelf: BookShelf.propTypes.books,
+    onUpdateBookShelf: BookShelf.propTypes.onUpdateBookShelf,
+    onAddBookClick: PropTypes.func.isRequired
+};
