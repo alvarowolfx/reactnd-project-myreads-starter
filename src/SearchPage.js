@@ -1,6 +1,8 @@
 import React from "react";
 import * as BooksAPI from './BooksAPI';
 
+import { Debounce } from 'react-throttle';
+
 import BooksGrid from './BooksGrid';
 
 export default class SearchPage extends React.Component {
@@ -76,8 +78,11 @@ export default class SearchPage extends React.Component {
                         Close
                     </a>
                     <div className="search-books-input-wrapper">
-                        <input type="text" placeholder="Search by title or author"
-                            onChange={this.onSearchInputChange.bind(this)} />
+                        <Debounce time="400" handler="onChange">
+                            <input type="text" placeholder="Search by title or author"
+                                onChange={this.onSearchInputChange.bind(this)}
+                                disabled={loading} />
+                        </Debounce>
                     </div>
                 </div>
                 <div className="search-books-results">

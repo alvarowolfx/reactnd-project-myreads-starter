@@ -3,7 +3,6 @@ import "./App.css";
 
 import { Route } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
 
 import * as BooksAPI from "./BooksAPI";
 
@@ -52,7 +51,7 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    let { booksOnShelf, loading, history } = this.state;
+    let { booksOnShelf, loading } = this.state;
     return (
       <div className="app">
 
