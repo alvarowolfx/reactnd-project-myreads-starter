@@ -1,11 +1,11 @@
 import React from "react";
 
-const Book = ({ book, onUpdateBookOnShelf }) => {
+const Book = ({ book, onUpdateBookShelf }) => {
     const onBookShelfChange = (evt) => {
         let shelf = evt.target.value;
-        console.log(onUpdateBookOnShelf);
-        onUpdateBookOnShelf && onUpdateBookOnShelf(book, shelf);
+        onUpdateBookShelf && onUpdateBookShelf(book, shelf);
     }
+    let backgroundImage = book.imageLinks && `url("${book.imageLinks.thumbnail}")`;
     return (
         <div className="book">
             <div className="book-top">
@@ -14,8 +14,7 @@ const Book = ({ book, onUpdateBookOnShelf }) => {
                     style={{
                         width: 128,
                         height: 193,
-                        backgroundImage:
-                        `url("${book.imageLinks.thumbnail}")`
+                        backgroundImage
                     }}
                 />
                 <div className="book-shelf-changer">

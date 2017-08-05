@@ -1,7 +1,7 @@
 import React from 'react';
 import BooksGrid from './BooksGrid';
 
-const BookShelf = ({ name, books, onUpdateBookOnShelf }) => {
+const BookShelf = ({ name, books, onUpdateBookShelf }) => {
     return (
         <div>
             <div className="bookshelf">
@@ -9,7 +9,7 @@ const BookShelf = ({ name, books, onUpdateBookOnShelf }) => {
                 <div className="bookshelf-books">
                     {books.length > 0 ?
                         <BooksGrid books={books}
-                            onUpdateBookOnShelf={onUpdateBookOnShelf} />
+                            onUpdateBookShelf={onUpdateBookShelf} />
                         :
                         <h3> No books on this section </h3>
                     }

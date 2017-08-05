@@ -33,7 +33,7 @@ export default class BookShelfPage extends React.Component {
                             <BookShelf key={shelf}
                                 name={name}
                                 books={sectionBooks}
-                                onUpdateBookOnShelf={this.props.onUpdateBookOnShelf} />
+                                onUpdateBookShelf={this.props.onUpdateBookShelf} />
                         )
                     })}
                 </div>

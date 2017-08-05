@@ -14,7 +14,7 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     booksOnShelf: [],
-    showSearchPage: false
+    showSearchPage: true
   };
 
   async componentDidMount() {
@@ -55,10 +55,13 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         {this.state.showSearchPage
-          ? <SearchPage booksOnShelf={booksOnShelf} back={() => this.goToShelf()} />
+          ? <SearchPage
+            booksOnShelf={booksOnShelf}
+            onAddBookOnShelf={(book, shelf) => this.updateBookOnShelf(book, shelf)}
+            onBackClick={() => this.goToShelf()} />
           : <BookShelfPage
             booksOnShelf={booksOnShelf}
-            onUpdateBookOnShelf={(book, shelf) => this.updateBookOnShelf(book, shelf)}
+            onUpdateBookShelf={(book, shelf) => this.updateBookOnShelf(book, shelf)}
             onAddBookClick={() => this.goToSearch()} />}
       </div>
     );

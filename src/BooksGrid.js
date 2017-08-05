@@ -1,13 +1,13 @@
 import React from "react";
 import Book from './Book';
 
-const BooksGrid = ({ books, onUpdateBookOnShelf }) => {
+const BooksGrid = ({ books, onUpdateBookShelf }) => {
     return (
         <ol className="books-grid">
             {books.map(book =>
                 <li key={book.id}>
                     <Book book={book}
-                        onUpdateBookOnShelf={onUpdateBookOnShelf} />
+                        onUpdateBookShelf={onUpdateBookShelf} />
                 </li>
             )}
         </ol>
