@@ -1,21 +1,20 @@
 import React from "react";
-import * as BooksAPI from "./BooksAPI";
 import "./App.css";
+
+import { Route } from 'react-router';
+import { BrowserRouter as Router } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
+
+import * as BooksAPI from "./BooksAPI";
 
 import SearchPage from './SearchPage';
 import BookShelfPage from './BookShelfPage';
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     booksOnShelf: [],
     showSearchPage: false,
-    loading: false,
+    loading: false
   };
 
   async componentDidMount() {
@@ -44,31 +43,39 @@ class BooksApp extends React.Component {
     await BooksAPI.update(book, shelf);
   }
 
-  goToSearch() {
-    this.setState({ showSearchPage: true })
+  goToSearch(history) {
+    history.push("/search");
   }
 
-  goToShelf() {
-    this.setState({ showSearchPage: false })
+  goToShelf(history) {
+    history.push("/");
   }
 
   render() {
-    let { booksOnShelf, loading } = this.state;
+    let { booksOnShelf, loading, history } = this.state;
     return (
       <div className="app">
+
         {loading && <div className="app-loading-bar">
           Loading your bookshelf...
         </div>}
 
-        {this.state.showSearchPage
-          ? <SearchPage
-            booksOnShelf={booksOnShelf}
-            onAddBookOnShelf={(book, shelf) => this.updateBookOnShelf(book, shelf)}
-            onBackClick={() => this.goToShelf()} />
-          : <BookShelfPage
-            booksOnShelf={booksOnShelf}
-            onUpdateBookShelf={(book, shelf) => this.updateBookOnShelf(book, shelf)}
-            onAddBookClick={() => this.goToSearch()} />}
+        <Router>
+          <div>
+            <Route exact path="/" render={({ history }) => (
+              <BookShelfPage
+                booksOnShelf={booksOnShelf}
+                onUpdateBookShelf={(book, shelf) => this.updateBookOnShelf(book, shelf)}
+                onAddBookClick={() => this.goToSearch(history)} />
+            )} />
+            <Route exact path="/search" render={({ history }) => (
+              <SearchPage
+                booksOnShelf={booksOnShelf}
+                onAddBookOnShelf={(book, shelf) => this.updateBookOnShelf(book, shelf)}
+                onBackClick={() => this.goToShelf(history)} />
+            )} />
+          </div>
+        </Router>
       </div>
     );
   }
