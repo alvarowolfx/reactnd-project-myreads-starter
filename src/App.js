@@ -14,12 +14,14 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     booksOnShelf: [],
-    showSearchPage: true
+    showSearchPage: false,
+    loading: false,
   };
 
   async componentDidMount() {
+    this.setState({ loading: true });
     let booksOnShelf = await BooksAPI.getAll()
-    this.setState({ booksOnShelf });
+    this.setState({ booksOnShelf, loading: false });
   }
 
   async updateBookOnShelf(book, shelf) {
@@ -51,9 +53,13 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    let { booksOnShelf } = this.state;
+    let { booksOnShelf, loading } = this.state;
     return (
       <div className="app">
+        {loading && <div className="app-loading-bar">
+          Loading your bookshelf...
+        </div>}
+
         {this.state.showSearchPage
           ? <SearchPage
             booksOnShelf={booksOnShelf}
